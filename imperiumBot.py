@@ -2,7 +2,11 @@ import discord
 from discord.ext import commands 
 import re 
 from collections import defaultdict
+from dotenv import load_dotenv
 import os
+
+
+load_dotenv()  # this loads the variables from .env file into the environment
 
 # election_id -> candidate -> points
 elections = defaultdict(lambda: defaultdict(int))
