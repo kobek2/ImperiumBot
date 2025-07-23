@@ -11,6 +11,15 @@ load_dotenv()  # this loads the variables from .env file into the environment
 # election_id -> candidate -> points
 elections = defaultdict(lambda: defaultdict(int))
 
+# Add your specific channel IDs here
+ALLOWED_CHANNEL_IDS = [
+    1396726042198278224,  # Replace with your actual channel ID(s)
+    1277752818337452143,
+    1277752879712702475,
+    1396731303776223232
+]
+
+
 
 TOKEN = os.getenv("DISCORD_BOT_TOKEN")
 
@@ -62,6 +71,10 @@ async def on_message(message):
     await bot.process_commands(message)
 
     if message.author.bot:
+        return
+
+    # ✅ Only track messages in allowed channels
+    if message.channel.id not in ALLOWED_CHANNEL_IDS:
         return
 
     for election_name, data in elections.items():
