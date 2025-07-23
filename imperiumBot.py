@@ -2,12 +2,13 @@ import discord
 from discord.ext import commands 
 import re 
 from collections import defaultdict
+import os
 
 # election_id -> candidate -> points
 elections = defaultdict(lambda: defaultdict(int))
 
 
-TOKEN = "MTM5NzM2Njk2OTk5NjU0NjE1MQ.GCjb1I.0ObS6JCW-hfCuCfLcf40Qy33Q19qlwZqAH52jQ"
+TOKEN = os.getenv("DISCORD_BOT_TOKEN")
 
 intents = discord.Intents.default() 
 intents.message_content = True
@@ -106,4 +107,4 @@ async def on_command_error(ctx, error):
     print(f"Error: {error}")
 
 
-bot.run("MTM5NzM2Njk2OTk5NjU0NjE1MQ.GCjb1I.0ObS6JCW-hfCuCfLcf40Qy33Q19qlwZqAH52jQ")
+bot.run(TOKEN)
